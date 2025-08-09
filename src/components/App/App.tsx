@@ -4,6 +4,7 @@ import VoteOptions from "../VoteOptions/VoteOptions.tsx";
 import { useState } from "react";
 import type { Votes, VoteType } from "../../types/votes.ts";
 import VoteStats from "../VoteStats/VoteStats.tsx";
+import Notification from "../Notification/Notification.tsx";
 
 function App() {
   const [votes, setVotes] = useState<Votes>({
@@ -28,11 +29,9 @@ function App() {
   }
 
   const totalVotes: number = votes.good + votes.neutral + votes.bad;
-  const hasVotes = totalVotes > 0;
   const positiveRate: number = totalVotes
     ? Math.round((votes.good / totalVotes) * 100)
     : 0;
-  console.log(Math.round((votes.good / totalVotes) * 100));
   return (
     <>
       <div className={css.app}>
@@ -40,14 +39,18 @@ function App() {
         <VoteOptions
           onVote={handleVote}
           onReset={resetVotes}
-          canReset={hasVotes}
+          canReset={totalVotes > 0}
         />
 
-        <VoteStats
-          votes={votes}
-          totalVotes={totalVotes}
-          positiveRate={positiveRate}
-        />
+        {totalVotes > 0 ? (
+          <VoteStats
+            votes={votes}
+            totalVotes={totalVotes}
+            positiveRate={positiveRate}
+          />
+        ) : (
+          <Notification />
+        )}
       </div>
     </>
   );

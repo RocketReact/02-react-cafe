@@ -34,9 +34,11 @@ export default function VoteOptions({
         <button onClick={() => onVotes("bad")} className={css.button}>
           Bad
         </button>
-        <button onClick={onResets} className={`${css.button} ${css.reset}`}>
-          Reset
-        </button>
+        {canReset ? (
+          <button onClick={onResets} className={`${css.button} ${css.reset}`}>
+            Reset
+          </button>
+        ) : null}
       </div>
     </div>
   );
