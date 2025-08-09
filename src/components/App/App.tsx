@@ -2,8 +2,7 @@ import css from "./App.module.css";
 import CafeInfo from "../CafeInfo/CafeInfo.tsx";
 import VoteOptions from "../VoteOptions/VoteOptions.tsx";
 import { useState } from "react";
-import type Votes from "../../types/votes.ts";
-import type { VoteType } from "../../types/votes.ts";
+import type { Votes, VoteType } from "../../types/votes.ts";
 import VoteStats from "../VoteStats/VoteStats.tsx";
 
 function App() {
@@ -13,10 +12,10 @@ function App() {
     bad: 0,
   });
 
-  function handleVote(voteType: VoteType) {
+  function handleVote(key: VoteType) {
     setVotes({
       ...votes,
-      [voteType]: votes[voteType] + 1,
+      [key]: votes[key] + 1,
     });
   }
 
