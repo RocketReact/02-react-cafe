@@ -26,8 +26,13 @@ function App() {
       bad: 0,
     });
   }
-  const hasVotes = votes.good > 0 || votes.neutral > 0 || votes.bad > 0;
 
+  const totalVotes: number = votes.good + votes.neutral + votes.bad;
+  const hasVotes = totalVotes > 0;
+  const positiveRate: number = totalVotes
+    ? Math.round((votes.good / totalVotes) * 100)
+    : 0;
+  console.log(Math.round((votes.good / totalVotes) * 100));
   return (
     <>
       <div className={css.app}>
@@ -38,7 +43,11 @@ function App() {
           canReset={hasVotes}
         />
 
-        <VoteStats />
+        <VoteStats
+          votes={votes}
+          totalVotes={totalVotes}
+          positiveRate={positiveRate}
+        />
       </div>
     </>
   );
