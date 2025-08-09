@@ -15,7 +15,7 @@ export default defineConfig({
     process.env.NODE_ENV === "production"
       ? process.env.VERCEL
         ? "/"
-        : "/my-react-practice/"
+        : "/02-react-cafe/"
       : "./",
   build: {
     sourcemap: true,
